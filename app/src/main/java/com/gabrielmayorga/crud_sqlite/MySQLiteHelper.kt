@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper
 class MySQLiteHelper(context : Context) : SQLiteOpenHelper(context, "amigos.db", null, 1) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val ordenCreacion = "CREATE TABLE amigos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, email TEXT)"
+        val ordenCreacion = "CREATE TABLE amigos (_id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, email TEXT)"
         db!!.execSQL(ordenCreacion)
     }
 
@@ -32,7 +32,7 @@ class MySQLiteHelper(context : Context) : SQLiteOpenHelper(context, "amigos.db",
         val args = arrayOf(id.toString())
 
         val db = this.writableDatabase
-        val deleted = db.delete("amigos", "id = ?", args)
+        val deleted = db.delete("amigos", "_id = ?", args)
         db.close()
 
         return deleted
@@ -46,7 +46,7 @@ class MySQLiteHelper(context : Context) : SQLiteOpenHelper(context, "amigos.db",
         datos.put("email", email)
 
         val db = this.writableDatabase
-        db.update("amigos", datos,"id = ?", args)
+        db.update("amigos", datos,"_id = ?", args)
         db.close()
     }
 
