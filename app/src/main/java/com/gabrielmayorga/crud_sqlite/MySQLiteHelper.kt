@@ -7,8 +7,15 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class MySQLiteHelper(context : Context) : SQLiteOpenHelper(context, "amigos.db", null, 1) {
 
+    companion object{
+        val NOMBRE_TABLA = "amigos"
+        val CAMPO_ID = "_id"
+        val CAMPO_NOMBRE = "nombre"
+        val CAMPO_EMAIL = "email"
+    }
+
     override fun onCreate(db: SQLiteDatabase?) {
-        val ordenCreacion = "CREATE TABLE amigos (_id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, email TEXT)"
+        val ordenCreacion = "CREATE TABLE amigos (${CAMPO_ID} INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, email TEXT)"
         db!!.execSQL(ordenCreacion)
     }
 

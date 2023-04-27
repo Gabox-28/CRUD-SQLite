@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
         binding.btnConsultar.setOnClickListener{
             binding.tvResultado.text = ""
             val db : SQLiteDatabase = amigosDBHelper.readableDatabase
-            val cursor = db.rawQuery("SELECT * FROM amigos", null)
+            val cursor = db.rawQuery("SELECT * FROM ${MySQLiteHelper.NOMBRE_TABLA}", null)
             if (cursor.moveToFirst()){
                 do{
                     binding.tvResultado.append(cursor.getInt(0).toString() + ": ")
