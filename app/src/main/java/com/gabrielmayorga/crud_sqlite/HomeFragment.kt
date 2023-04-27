@@ -8,14 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.gabrielmayorga.crud_sqlite.databinding.ActivityMainBinding
 import com.gabrielmayorga.crud_sqlite.databinding.FragmentHomeBinding
 import com.gabrielmayorga.crud_sqlite.databinding.FragmentListViewBinding
 
 class HomeFragment : Fragment() {
 
-    lateinit var binding: FragmentHomeBinding
-    lateinit var amigosDBHelper: MySQLiteHelper
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var amigosDBHelper: MySQLiteHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +81,11 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnListView.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.listViewFragment)
+            findNavController().navigate(R.id.action_homeFragment2_to_listViewFragment)
+        }
+
+        binding.btnRecyclerView.setOnClickListener{
+            Navigation.findNavController(binding.root).navigate(R.id.recyclerViewFragment)
         }
     }
 
