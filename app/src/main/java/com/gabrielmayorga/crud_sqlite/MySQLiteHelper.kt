@@ -20,18 +20,18 @@ class MySQLiteHelper(context : Context) : SQLiteOpenHelper(context, "amigos.db",
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        val ordenBorrado = "DROP TABLE IF EXISTS amigos"
+        val ordenBorrado = "DROP TABLE IF EXISTS $NOMBRE_TABLA"
         db!!.execSQL(ordenBorrado)
         onCreate(db)
     }
 
     fun addDatos(nombre:String, email:String){
         val datos = ContentValues()
-        datos.put("nombre", nombre)
-        datos.put("email", email)
+        datos.put(CAMPO_NOMBRE, nombre)
+        datos.put(CAMPO_EMAIL, email)
 
         val db = this.writableDatabase
-        db.insert("amigos", null, datos)
+        db.insert(NOMBRE_TABLA, null, datos)
         db.close()
     }
 
@@ -39,7 +39,7 @@ class MySQLiteHelper(context : Context) : SQLiteOpenHelper(context, "amigos.db",
         val args = arrayOf(id.toString())
 
         val db = this.writableDatabase
-        val deleted = db.delete("amigos", "_id = ?", args)
+        val deleted = db.delete(NOMBRE_TABLA, "$CAMPO_ID = ?", args)
         db.close()
 
         return deleted
@@ -49,11 +49,11 @@ class MySQLiteHelper(context : Context) : SQLiteOpenHelper(context, "amigos.db",
         val args = arrayOf(id.toString())
 
         val datos = ContentValues()
-        datos.put("nombre", nombre)
-        datos.put("email", email)
+        datos.put(CAMPO_NOMBRE, nombre)
+        datos.put(CAMPO_EMAIL, email)
 
         val db = this.writableDatabase
-        db.update("amigos", datos,"_id = ?", args)
+        db.update(NOMBRE_TABLA, datos, CAMPO_ID, args)
         db.close()
     }
 

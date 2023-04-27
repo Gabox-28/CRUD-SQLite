@@ -3,11 +3,13 @@ package com.gabrielmayorga.crud_sqlite
 import android.annotation.SuppressLint
 import android.content.Context
 import android.database.Cursor
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.gabrielmayorga.crud_sqlite.databinding.ItemRecyclerviewBinding
 
@@ -41,6 +43,8 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
 
         holder.tvNombre.text = cursor.getString(1)
         holder.tvEmail.text = cursor.getString(2)
+
+
     }
 
     inner class ViewHolder: RecyclerView.ViewHolder{
@@ -50,11 +54,19 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
 
         constructor(view: View) : super(view){
             val bindingItemsRV = ItemRecyclerviewBinding.bind(view)
+            val bundle = Bundle()
+
             tvNombre = bindingItemsRV.tvNombre
             tvEmail = bindingItemsRV.tvEmail
 
+            bundle.putString("nombre", tvNombre.toString())
+            bundle.putString("mail", tvEmail.toString())
+
+
             view.setOnClickListener{
-                Toast.makeText(context, "${tvNombre}, ${tvEmail}", Toast.LENGTH_SHORT).show()
+                /*Toast.makeText(context, "${tvNombre}, ${tvEmail}", Toast.LENGTH_SHORT).show()*/
+                /*var etNombre = itemView.findViewById<TextView>(R.id.edNombre)
+                var etEmail= itemView.findViewById<TextView>(R.id.edEmail)*/
             }
         }
     }

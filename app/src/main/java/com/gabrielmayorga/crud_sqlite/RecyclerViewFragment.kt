@@ -28,7 +28,7 @@ class RecyclerViewFragment : Fragment() {
         DBHelper = MySQLiteHelper(requireContext())
         db = DBHelper.readableDatabase
 
-        val cursor : Cursor = db.rawQuery("SELECT * FROM amigos", null)
+        val cursor : Cursor = db.rawQuery("SELECT * FROM ${MySQLiteHelper.NOMBRE_TABLA}", null)
         val adaptador = MyRecyclerViewAdapter()
         adaptador.MyRecyclerViewAdapter(requireContext(), cursor)
 
